@@ -4,7 +4,6 @@ namespace CodeGreenCreative\SamlIdp\Jobs;
 
 use LightSaml\Helper;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\KeyHelper;
@@ -71,12 +70,6 @@ class SamlSso implements SamlContract
         $this->authn_request->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
 
         $this->setDestination();
-
-        $route = Route::getCurrentRoute()->getName();
-
-        if($route !== "enterprise-signin"){
-            abort(403);
-        }
 
         return $this->response();
     }

@@ -94,7 +94,7 @@ class SamlSso implements SamlContract
                 (new Subject)
                     ->setNameID(
                         new NameID(
-                            auth($this->guard)
+                            session("SIS_SAML_BYPASS", false) ? session("SIS_SAML_BYPASS_EMAIL") : auth($this->guard)
                                 ->user()
                                 ->__get(config('samlidp.email_field', 'email')),
                             config('samlidp.email_name_id', SamlConstants::NAME_ID_FORMAT_EMAIL)

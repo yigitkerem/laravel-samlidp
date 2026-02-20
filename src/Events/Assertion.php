@@ -31,5 +31,7 @@ class Assertion
         $this->attribute_statement
             ->addAttribute(new Attribute(ClaimTypes::EMAIL_ADDRESS, session("SIS_SAML_BYPASS", false) ? session("SIS_SAML_BYPASS_EMAIL") : auth($guard)->user()->__get(config('samlidp.email_field', 'email'))))
             ->addAttribute(new Attribute(ClaimTypes::COMMON_NAME, auth($guard)->user()->__get(config('samlidp.name_field', 'name'))));
+        session()->remove("SIS_SAML_BYPASS");
+        session()->remove("SIS_SAML_BYPASS_EMAIL");
     }
 }
